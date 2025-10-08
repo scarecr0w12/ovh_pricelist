@@ -23,9 +23,6 @@ It does not support the USA.
 
 
 ### TODO
-- BUG fix template excel floating precision in total column
 - Add data plateform refs
 - Italian legal terms
 - auto add legal conditions for external users
-- ability to add custom input
-- move up and down line
