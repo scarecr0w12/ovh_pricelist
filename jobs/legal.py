@@ -44,7 +44,7 @@ LEGALS_DATA = {
             {'key': "Conditions Générales de Services Professionnels", 'selected': True },
             {'key': None, 'title': "HDS pour VMware on OVHcloud - Serveurs Dédiés - Nutanix - File Storage", 'selected': False, 'url': "https://contract.eu.ovhapis.com/1.0/pdf/HPC_HDS-fr.pdf" },
             {'key': None, 'title': "Healthcare - Public Cloud", 'selected': False, 'url': "https://contract.eu.ovhapis.com/1.0/pdf/Public_Cloud_Health_Care_HDS-fr.pdf" },
-            {'key': None, 'title': 'Conditions Particulières HPC SNC', 'selected': False, 'url': 'https://storage.gra.cloud.ovh.net/v1/AUTH_325716a587c64897acbef9a4a4726e38/contracts/0c59e05-HPC_SNC-FR-3.0.pdf '},
+            {'key': None, 'title': 'Conditions Particulières HPC SNC', 'selected': False, 'url': 'https://storage.gra.cloud.ovh.net/v1/AUTH_325716a587c64897acbef9a4a4726e38/contracts/0c59e05-HPC_SNC-FR-3.0.pdf'},
             {'key': None, 'title': "Conditions Particulières Support Editeur d'OVHcloud pour HPC SecNumCloud", 'selected': False, 'url': 'https://storage.gra.cloud.ovh.net/v1/AUTH_325716a587c64897acbef9a4a4726e38/contracts/2cbc744-Support_Editeur_SNC-FR-2.0.pdf'}
         ]
     },
