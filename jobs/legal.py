@@ -85,6 +85,25 @@ LEGALS_DATA = {
             {'key': "Besondere Vertragsbedingungen - OVHcloud Connect", 'selected': False},
             {'key': "Besondere Vertragsbedingungen Load Balancer", 'selected': False},
         ]
+    },
+    'it': {
+        'link': 'https://www.ovhcloud.com/it/terms-and-conditions/contracts/',
+        'mandatory_keys' :[
+            {'key': 'Condizioni Generali di Servizio', 'title': 'Condizioni Generali di Servizio'},
+            {'key': 'Contratto per il trattamento dei dati', 'title': 'Contratto per il trattamento dei dati'},
+        ],
+        'to_select_keys' : [
+            {'key': "Condizioni Particolari di utilizzo del Public Cloud OVH", 'selected': True},
+            {'key': "Specific Conditions Hosted Private Cloud VMware on OVHcloud", 'title': 'CONDIZIONI PARTICOLARI DI SERVIZIO HOSTED PRIVATE CLOUD VMware on OVHcloud', 'selected': True},
+            {'key': "Condizioni Particolari dei server dedicati", 'selected': True},
+            {'key': "Condizioni Supporto Premium di OVH", 'selected': False},
+            {'key': "Specific Conditions OVHcloud Business Support", 'selected': True},
+            {'key': "Specific Conditions OVHcloud Enterprise Support", 'selected': True},
+            {'key': None, 'title': 'Condizioni Particolari - SAP HANA on Private Cloud', 'url': 'https://contract.eu.ovhapis.com/1.0/pdf/SAP_HANA_on_Private_Cloud-it.pdf', 'selected': False},
+            {'key': "Condizioni Particolari – Servizi Professionali", 'selected': True},
+            {'key': "Specific Conditions OVHcloud Connect", 'selected': False},
+            {'key': "Condizioni Particolari Load Balancer", 'selected': False},
+        ]
     }
 }
 

@@ -23,6 +23,7 @@ It does not support the USA.
 
 
 ### TODO
+- PAR3 region encoding issue, shows empty when reloading page
 - Add data plateform refs
 - Italian legal terms
 - auto add legal conditions for external users

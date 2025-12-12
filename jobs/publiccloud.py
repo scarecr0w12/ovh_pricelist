@@ -58,7 +58,7 @@ MONTHLY_ONLY_FAMILIES = [
     'registry',
     'floatingip',
     'volume-backup'
-    # 'storage',
+    'storage',
 ]
 
 def instance_spec_string(x):
@@ -133,6 +133,27 @@ def database_description(x):
     return desc
 
 # Map of family and function to render description
+STORAGE_PLAN_CODE_DESCRIPTION = {
+    'archive': "Cloud Archive storage - per GB",
+    'image': 'Instance Backup - per GB',
+    'storage-standard': 'Object Storage Standard - S3 API - per GB',
+    'storage-high-perf': 'Object Storage High Performance - S3 API - per GB',
+    'storage': 'Object Storage Swift (legacy) - per GB',
+    'earlydelete_storage-standard-ia': 'Object Storage Infrequent Access - Deletion - per GB',
+    'earlydelete_storage-standard-ia-3AZ': 'Object Storage Infrequent Access 3AZ - Deletion - per GB',
+    'storage-standard-ia-3AZ': 'Object Storage Infrequent Access 3AZ - S3 API - per GB',
+    'retrieval_storage-standard-ia': 'Object Storage Infrequent Access - Retrieval - per GB',
+    'retrieval_storage-standard-ia-3AZ': 'Object Storage Infrequent Access 3AZ - Retrieval - per GB'
+}
+
+def storage_plan_code_description(x):
+    if 'bandwidth' not in x['plan_code']:
+        plan_code = x['plan_code'].replace('.monthly.postpaid', '').replace('.consumption', '')
+        if plan_code in STORAGE_PLAN_CODE_DESCRIPTION:
+            return STORAGE_PLAN_CODE_DESCRIPTION[plan_code]
+        return plan_code
+    return x['invoiceName'] + ' - per GB'
+
 DESCRIPTION_RENDERERS = {
     'ai-training': lambda x: x['invoiceName'].replace(' on #REGION#', '').replace('Per minute usage for Public Cloud', '(Minute)').replace('Per hour usage for Public Cloud', '(Hourly)'),
     'databases': database_description,
@@ -142,18 +163,7 @@ DESCRIPTION_RENDERERS = {
     'publiccloud-instance': instance_spec_string,
     'registry': lambda x: f"Managed Private Registry {x['com']['name']} - {storage_string(x['tech']['storage']['disks'][0]['capacity'])}",
     'snapshot': lambda x: 'Volume Backup - Stockage réplica x3 - per GB' if x['plan_code'] == 'snapshot.monthly.postpaid' else 'Volume Backup - Stockage réplica x3  - per GB',
-    'storage': lambda x: {
-        'archive': "Cloud Archive storage - per GB",
-        'image': 'Instance Backup - per GB',
-        'storage-standard': 'Object Storage Standard - S3 API - per GB',
-        'storage-high-perf': 'Object Storage High Performance - S3 API - per GB',
-        'storage': 'Object Storage Swift (legacy) - per GB',
-        'earlydelete_storage-standard-ia': 'Object Storage Infrequent Access - Deletion - per GB',
-        'earlydelete_storage-standard-ia-3AZ': 'Object Storage Infrequent Access 3AZ - Deletion - per GB',
-        'storage-standard-ia-3AZ': 'Object Storage Infrequent Access 3AZ - S3 API - per GB',
-        'retrieval_storage-standard-ia': 'Object Storage Infrequent Access - Retrieval - per GB',
-        'retrieval_storage-standard-ia-3AZ': 'Object Storage Infrequent Access 3AZ - Retrieval - per GB'
-    }[x['plan_code'].replace('.monthly.postpaid', '').replace('.consumption', '')] if 'bandwidth' not in x['plan_code'] else x['invoiceName'] + ' - per GB',
+    'storage': storage_plan_code_description,
     'volume': lambda x: f"Block Storage - {x['tech']['name'].capitalize()} {x['tech']['volume']['iops']['level']} " + (f"{x['tech']['volume']['iops']['unit']} max {x['tech']['volume']['iops']['max']} IOPS" if 'unit' in x['tech']['volume']['iops'] else 'IOPS') + ' - per GB',
     'octavia-loadbalancer': lambda x: f"{x['invoiceName']} - {bandwidth_string(x['tech']['bandwidth']['level'])}",
     'ai-endpoints': lambda x: f"{x['invoiceName']} - Quantization {x['tech']['quantization']}",
@@ -183,7 +193,6 @@ def get_api_cloud_prices(sub, debug=False):
             if int(price['price']) == 0 and float(price['price']).is_integer():
                 continue
             
-
             duration = price['description'].lower()
             if 'month' in duration:
                 duration = 'month'

@@ -99,7 +99,6 @@ def get_occ_options(sub='FR'):
         for con in CONFORMITY + ['snc']:
             item['price_'+con] = price
         plans.append(item)
-        print(item)
     return plans
 
 def get_ip_lb(sub='FR'):
